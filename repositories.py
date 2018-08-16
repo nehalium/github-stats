@@ -1,5 +1,6 @@
 import json
 import ConfigParser
+import os
 
 config = ConfigParser.ConfigParser()
 config.read("config.ini")
@@ -77,7 +78,10 @@ class Repositories:
 
     @staticmethod
     def write_result(result, iteration):
-        result_file = open("test/fixtures/repos-" + str(iteration) + ".json", "w")
+        path = "test/fixtures"
+        if not os.path.exists(path):
+            os.makedirs(path)
+        result_file = open(path + "/repos-" + str(iteration) + ".json", "w")
         result_file.write(result)
         result_file.close()
 
